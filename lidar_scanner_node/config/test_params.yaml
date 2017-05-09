@@ -1,0 +1,8 @@
+scanner:
+  theta_span: 2.0
+  phi_span: 2.0
+  theta_points: 50
+  phi_points: 50
+  los_variance: 0.010
+  orthogonal_variance: 0.010
+  max_incidence_angle: 60

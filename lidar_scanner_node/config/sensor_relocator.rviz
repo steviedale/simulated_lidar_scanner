@@ -1,0 +1,446 @@
+Panels:
+  - Class: rviz/Displays
+    Help Height: 78
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Global Options1
+        - /Status1
+      Splitter Ratio: 0.5
+    Tree Height: 895
+  - Class: rviz/Selection
+    Name: Selection
+  - Class: rviz/Tool Properties
+    Expanded:
+      - /2D Pose Estimate1
+      - /2D Nav Goal1
+      - /Publish Point1
+    Name: Tool Properties
+    Splitter Ratio: 0.588679016
+  - Class: rviz/Views
+    Expanded:
+      - /Current View1
+    Name: Views
+    Splitter Ratio: 0.5
+  - Class: rviz/Time
+    Experimental: false
+    Name: Time
+    SyncMode: 0
+    SyncSource: PointCloud2
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Alpha: 0.5
+      Cell Size: 1
+      Class: rviz/Grid
+      Color: 160; 160; 164
+      Enabled: true
+      Line Style:
+        Line Width: 0.0299999993
+        Value: Lines
+      Name: Grid
+      Normal Cell Count: 0
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Plane: XY
+      Plane Cell Count: 10
+      Reference Frame: <Fixed Frame>
+      Value: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        airplane:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        floor:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hangar:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        hangar_columns:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        odom:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        platform_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        platform_link_1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        platform_link_2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        platform_link_3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        platform_tool0:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        rail_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rail_link_1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rail_link_2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rail_tool0:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        rail_touch_screen:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        robot_balancer_piston:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        robot_balancer_rod:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        robot_base:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        robot_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        robot_link_b:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        robot_link_l:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        robot_link_r:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        robot_link_s:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        robot_link_t:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        robot_link_u:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        robot_tool0:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        sander_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        sander_link_1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        sander_tool0:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        scanner_1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        scanner_2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        scanner_3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+      Name: RobotModel
+      Robot Description: robot_description
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Class: rviz/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: true
+        airplane:
+          Value: true
+        floor:
+          Value: true
+        hangar:
+          Value: true
+        hangar_columns:
+          Value: true
+        odom:
+          Value: true
+        platform_base_link:
+          Value: true
+        platform_link_1:
+          Value: true
+        platform_link_2:
+          Value: true
+        platform_link_3:
+          Value: true
+        platform_tool0:
+          Value: true
+        rail_base_link:
+          Value: true
+        rail_link_1:
+          Value: true
+        rail_link_2:
+          Value: true
+        rail_tool0:
+          Value: true
+        rail_touch_screen:
+          Value: true
+        robot_balancer_piston:
+          Value: true
+        robot_balancer_rod:
+          Value: true
+        robot_base:
+          Value: true
+        robot_base_link:
+          Value: true
+        robot_link_b:
+          Value: true
+        robot_link_l:
+          Value: true
+        robot_link_r:
+          Value: true
+        robot_link_s:
+          Value: true
+        robot_link_t:
+          Value: true
+        robot_link_u:
+          Value: true
+        robot_tool0:
+          Value: true
+        sander_base_link:
+          Value: true
+        sander_link_1:
+          Value: true
+        sander_tool0:
+          Value: true
+        scanner_1:
+          Value: true
+        scanner_2:
+          Value: true
+        scanner_3:
+          Value: true
+        sensor_1:
+          Value: true
+        sensor_2:
+          Value: true
+        sensor_3:
+          Value: true
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        odom:
+          airplane:
+            {}
+          floor:
+            {}
+          hangar:
+            {}
+          hangar_columns:
+            {}
+          platform_base_link:
+            platform_link_1:
+              platform_link_2:
+                platform_link_3:
+                  platform_tool0:
+                    rail_base_link:
+                      rail_link_1:
+                        rail_link_2:
+                          rail_tool0:
+                            robot_base_link:
+                              robot_base:
+                                {}
+                              robot_link_s:
+                                robot_balancer_piston:
+                                  {}
+                                robot_balancer_rod:
+                                  {}
+                                robot_link_l:
+                                  robot_link_u:
+                                    robot_link_r:
+                                      robot_link_b:
+                                        robot_link_t:
+                                          robot_tool0:
+                                            sander_base_link:
+                                              sander_link_1:
+                                                sander_tool0:
+                                                  {}
+                      rail_touch_screen:
+                        {}
+                    scanner_1:
+                      {}
+                    scanner_2:
+                      {}
+                    scanner_3:
+                      {}
+                    sensor_1:
+                      {}
+                    sensor_2:
+                      {}
+                    sensor_3:
+                      {}
+      Update Interval: 0
+      Value: true
+    - Class: rviz/InteractiveMarkers
+      Enable Transparency: true
+      Enabled: true
+      Name: InteractiveMarkers
+      Show Axes: false
+      Show Descriptions: true
+      Show Visual Aids: false
+      Update Topic: /scanner_relocator/update
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: FlatColor
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: PointCloud2
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.00999999978
+      Style: Points
+      Topic: /sensor_data
+      Unreliable: false
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: true
+  Enabled: true
+  Global Options:
+    Background Color: 48; 48; 48
+    Fixed Frame: odom
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz/Interact
+      Hide Inactive Objects: true
+    - Class: rviz/MoveCamera
+    - Class: rviz/Select
+    - Class: rviz/FocusCamera
+    - Class: rviz/Measure
+    - Class: rviz/SetInitialPose
+      Topic: /initialpose
+    - Class: rviz/SetGoal
+      Topic: /move_base_simple/goal
+    - Class: rviz/PublishPoint
+      Single click: false
+      Topic: /clicked_point
+  Value: true
+  Views:
+    Current:
+      Class: rviz/Orbit
+      Distance: 30.1704369
+      Enable Stereo Rendering:
+        Stereo Eye Separation: 0.0599999987
+        Stereo Focal Distance: 1
+        Swap Stereo Eyes: false
+        Value: false
+      Focal Point:
+        X: -1.7552501
+        Y: 6.52755213
+        Z: 4.88143206
+      Focal Shape Fixed Size: true
+      Focal Shape Size: 0.0500000007
+      Name: Current View
+      Near Clip Distance: 0.00999999978
+      Pitch: 0.255398154
+      Target Frame: <Fixed Frame>
+      Value: Orbit (rviz)
+      Yaw: 3.9285779
+    Saved: ~
+Window Geometry:
+  Displays:
+    collapsed: false
+  Height: 1176
+  Hide Left Dock: false
+  Hide Right Dock: true
+  QMainWindow State: 000000ff00000000fd00000004000000000000016a0000040efc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006400fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c00610079007301000000280000040e000000dd00fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f0000040efc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a0056006900650077007300000000280000040e000000b000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000005ff0000003efc0100000002fb0000000800540069006d00650100000000000005ff0000030000fffffffb0000000800540069006d006501000000000000045000000000000000000000048f0000040e00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Selection:
+    collapsed: false
+  Time:
+    collapsed: false
+  Tool Properties:
+    collapsed: false
+  Views:
+    collapsed: true
+  Width: 1535
+  X: 65
+  Y: 24
