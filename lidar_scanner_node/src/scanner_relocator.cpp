@@ -76,10 +76,10 @@ void make6DOFControl(visualization_msgs::InteractiveMarker& m)
 }
 
 visualization_msgs::InteractiveMarker makeInteractiveMarker(std::string& scanner_frame,
-                                                            std::string& world_frame)
+                                                            std::string& scanner_parent_frame)
 {
   visualization_msgs::InteractiveMarker m;
-  m.header.frame_id = world_frame;
+  m.header.frame_id = scanner_parent_frame;
   m.scale = 1.0;
   m.name = scanner_frame;
   m.pose.position.x = m.pose.position.y = m.pose.position.z = 0.0;
@@ -108,10 +108,10 @@ int main(int argc, char **argv)
   ros::NodeHandle pnh("~");
 
   // Get ROS parameters
-  std::string world_frame;
-  if(!pnh.getParam("world_frame", world_frame))
+  std::string scanner_parent_frame;
+  if(!pnh.getParam("scanner_parent_frame", scanner_parent_frame))
   {
-    ROS_FATAL("'world_frame' parameter must be set");
+    ROS_FATAL("'scanner_parent_frame' parameter must be set");
     return 1;
   }
 
@@ -131,7 +131,7 @@ int main(int argc, char **argv)
   // Create an interactive marker for each of the remaining scanners
   for(size_t i = 0; i < scanner_frames.size(); ++i)
   {
-    visualization_msgs::InteractiveMarker int_marker = makeInteractiveMarker(scanner_frames[i], world_frame);
+    visualization_msgs::InteractiveMarker int_marker = makeInteractiveMarker(scanner_frames[i], scanner_parent_frame);
     server.insert(int_marker);
   }
   server.applyChanges();
@@ -152,7 +152,7 @@ int main(int argc, char **argv)
 
       transform.setOrigin(pos);
       transform.setRotation(quat);
-      broadcaster.sendTransform(tf::StampedTransform(transform, ros::Time::now(), world_frame, scanner_frames[i]));
+      broadcaster.sendTransform(tf::StampedTransform(transform, ros::Time::now(), scanner_parent_frame, scanner_frames[i]));
     }
 
     ros::spinOnce();

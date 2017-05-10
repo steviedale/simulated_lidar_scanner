@@ -1,0 +1,24 @@
+scanner:
+  # Horizontal Field of View (radians; 0 to 2*pi)
+  theta_span: 2.0
+
+  # Vertical Field of View (radians; -pi to pi)
+  phi_span: 2.0
+
+  # Number of Rays in Horizontal Plane
+  theta_points: 50
+
+  # Number of Rays in Vertical Plane
+  phi_points: 50
+
+  # Line of Sight Noise (optional, meters)
+  los_variance: 0.010
+
+  # Orthogonal Noise (optional, meters)
+  orthogonal_variance: 0.010
+
+  # Maximum Angle of Incidence before loss of data (optional; degrees)
+  max_incidence_angle: 60
+
+  # Maximum distance before loss of data (optional; meters)
+  max_distance: 10

@@ -1,5 +1,5 @@
 <launch>
-  <arg name="params_file" default="$(find lidar_scanner_node)/config/test_params.yaml"/>
+  <arg name="params_file" default="$(find lidar_scanner_node)/test/test_params.yaml"/>
   <arg name="world_frame_name" default="world"/>
   <arg name="scanner_frame_name" default="scanner"/>
   <arg name="scanner_name" default="scanner"/>

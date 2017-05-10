@@ -39,8 +39,10 @@ namespace
     return transform;
   }
 
-  vtkSmartPointer<vtkPolyData> readSTLFile(const std::string& file)
+  vtkSmartPointer<vtkPolyData> readSTLFile(std::string file)
   {
+    ROS_INFO("%s", file.c_str());
+
     vtkSmartPointer<vtkSTLReader> reader = vtkSmartPointer<vtkSTLReader>::New();
     reader->SetFileName(file.c_str());
     reader->SetMerging(1);

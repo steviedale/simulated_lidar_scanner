@@ -2,13 +2,18 @@
 #define LIDAR_SCANNER_SIMULATOR_H
 
 #include <lidar_scanner_node/synthetic_lidar_scanner/vtkLidarScanner.h>
-#include <lidar_scanner_node/scanner_params.h>
 #include <vtkSmartPointer.h>
 #include <vtkPolyData.h>
 #include <sensor_msgs/PointCloud2.h>
 #include <tf/transform_datatypes.h>
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
+
+struct scanner_params
+{
+  double theta_span, phi_span, los_variance, orthogonal_variance, max_incidence_angle, max_distance;
+  int theta_points, phi_points;
+};
 
 class LidarScannerSim
 {

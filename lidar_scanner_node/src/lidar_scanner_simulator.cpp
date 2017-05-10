@@ -1,5 +1,4 @@
 #include <lidar_scanner_node/lidar_scanner_simulator.h>
-#include <lidar_scanner_node/scanner_params.h>
 #include <pcl_ros/point_cloud.h>
 #include <pcl_ros/transforms.h>
 #include <tf/transform_datatypes.h>

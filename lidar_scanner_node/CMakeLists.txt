@@ -30,13 +30,13 @@ catkin_package(
 
 include_directories(include ${catkin_INCLUDE_DIRS})
 
-add_library(simulated_lidar_scanner SHARED
+add_library(synthetic_lidar_scanner SHARED
  src/synthetic_lidar_scanner/vtkLidarScanner.cxx
  src/synthetic_lidar_scanner/vtkRay.cxx
  src/synthetic_lidar_scanner/vtkLidarPoint.cxx
 )
 
-target_link_libraries(simulated_lidar_scanner
+target_link_libraries(synthetic_lidar_scanner
  ${catkin_LIBRARIES}
  ${VTK_LIBRARIES}
 )
@@ -45,11 +45,12 @@ add_executable(lidar_scanner_node src/lidar_scanner_node.cpp
                                   src/lidar_scanner_simulator.cpp
                                   src/scene_builder.cpp)
 
-add_dependencies(lidar_scanner_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+#add_dependencies(lidar_scanner_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 target_link_libraries(lidar_scanner_node
   ${catkin_LIBRARIES}
-  ${VTK_LIBRARIES})
+  ${VTK_LIBRARIES}
+  synthetic_lidar_scanner)
 
 add_executable(scanner_relocator src/scanner_relocator.cpp)
 
