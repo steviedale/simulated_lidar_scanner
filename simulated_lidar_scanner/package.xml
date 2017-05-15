@@ -1,14 +1,13 @@
 <?xml version="1.0"?>
 <package>
-  <name>lidar_scanner_node</name>
+  <name>simulated_lidar_scanner</name>
   <version>0.1.0</version>
-  <description>The lidar_scanner_node package</description>
+  <description>The simulated_lidar_scanner package</description>
 
-  <maintainer email="Ripperger@todo.todo">Michael Ripperger</maintainer>
+  <author email="michael.ripperger@swri.org">Michael Ripperger</author>
+  <maintainer email="michael.ripperger@swri.org">Michael Ripperger</maintainer>
 
   <license>Apache 2.0</license>
-
-  <author >Michael Ripperger</author>
 
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>cmake_modules</build_depend>

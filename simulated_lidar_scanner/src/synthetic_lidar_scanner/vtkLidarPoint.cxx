@@ -16,8 +16,8 @@
  *
  *=========================================================================*/
 
-#include "lidar_scanner_node/synthetic_lidar_scanner/vtkLidarPoint.h"
-#include "lidar_scanner_node/synthetic_lidar_scanner/vtkRay.h"
+#include "simulated_lidar_scanner/synthetic_lidar_scanner/vtkLidarPoint.h"
+#include "simulated_lidar_scanner/synthetic_lidar_scanner/vtkRay.h"
 
 #include "vtkSmartPointer.h"
 #include "vtkObjectFactory.h" //for new() macro

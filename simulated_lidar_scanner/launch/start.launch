@@ -1,10 +1,10 @@
 <launch>
-  <arg name="params_file" default="$(find lidar_scanner_node)/test/test_params.yaml"/>
+  <arg name="params_file" default="$(find simulated_lidar_scanner)/test/test_params.yaml"/>
   <arg name="world_frame_name" default="world"/>
   <arg name="scanner_frame_name" default="scanner"/>
   <arg name="scanner_name" default="scanner"/>
 
-  <node name="$(arg scanner_name)" pkg="lidar_scanner_node" type="lidar_scanner_node" output="screen" clear_params="true">
+  <node name="$(arg scanner_name)" pkg="simulated_lidar_scanner" type="simulated_lidar_scanner_node" output="screen" clear_params="true">
     <param name="world_frame" value="$(arg world_frame_name)"/>
     <param name="scanner_frame" value="$(arg scanner_frame_name)"/>
     <rosparam command="load" file="$(arg params_file)"/>

@@ -22,9 +22,9 @@
 #include <stdexcept>
 
 // Custom
-#include "lidar_scanner_node/synthetic_lidar_scanner/vtkRay.h"
-#include "lidar_scanner_node/synthetic_lidar_scanner/vtkLidarPoint.h"
-#include "lidar_scanner_node/synthetic_lidar_scanner/vtkLidarScanner.h"
+#include "simulated_lidar_scanner/synthetic_lidar_scanner/vtkRay.h"
+#include "simulated_lidar_scanner/synthetic_lidar_scanner/vtkLidarPoint.h"
+#include "simulated_lidar_scanner/synthetic_lidar_scanner/vtkLidarScanner.h"
 
 // VTK
 #include "vtkCellArray.h"

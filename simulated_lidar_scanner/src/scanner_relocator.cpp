@@ -4,6 +4,8 @@
 #include <tf/transform_listener.h>
 #include <tf/transform_broadcaster.h>
 
+const static double FREQUENCY = 10.0f;
+
 visualization_msgs::Marker makeVisualMarker(std::string& scanner_frame)
 {
   static int idx = 0;
@@ -80,7 +82,7 @@ visualization_msgs::InteractiveMarker makeInteractiveMarker(std::string& scanner
 {
   visualization_msgs::InteractiveMarker m;
   m.header.frame_id = scanner_parent_frame;
-  m.scale = 1.0;
+  m.scale = 0.5;
   m.name = scanner_frame;
   m.pose.position.x = m.pose.position.y = m.pose.position.z = 0.0;
   m.pose.orientation.x = m.pose.orientation.y = m.pose.orientation.z = 0.0;
@@ -92,6 +94,7 @@ visualization_msgs::InteractiveMarker makeInteractiveMarker(std::string& scanner
   // Controls
   visualization_msgs::InteractiveMarkerControl control;
   control.always_visible = true;
+  control.interaction_mode = visualization_msgs::InteractiveMarkerControl::NONE;
   control.markers.push_back(visual);
   m.controls.push_back(control);
   make6DOFControl(m);
@@ -112,39 +115,43 @@ int main(int argc, char **argv)
   if(!pnh.getParam("scanner_parent_frame", scanner_parent_frame))
   {
     ROS_FATAL("'scanner_parent_frame' parameter must be set");
-    return 1;
+    return -1;
   }
 
   std::vector<std::string> scanner_frames;
   if(!pnh.getParam("scanner_frames", scanner_frames))
   {
     ROS_FATAL("'scanner_frames' parameter must be set");
-    return 1;
+    return -1;
   }
 
   // Set up TF broadcaster for changing scanner frames
   tf::TransformBroadcaster broadcaster;
 
   // Set up interactive marker server
-  interactive_markers::InteractiveMarkerServer server("scanner_relocator");
+  interactive_markers::InteractiveMarkerServer server("scanner_relocator", "", true);
 
   // Create an interactive marker for each of the remaining scanners
   for(size_t i = 0; i < scanner_frames.size(); ++i)
   {
     visualization_msgs::InteractiveMarker int_marker = makeInteractiveMarker(scanner_frames[i], scanner_parent_frame);
     server.insert(int_marker);
+    server.applyChanges();
   }
-  server.applyChanges();
   ros::spinOnce();
 
   // Loop
-  ros::Rate loop(10.0f);
+  ros::Rate loop(FREQUENCY);
   while(ros::ok())
   {
     for(size_t i = 0; i < scanner_frames.size(); ++i)
     {
       visualization_msgs::InteractiveMarker int_marker;
-      server.get(scanner_frames[i], int_marker);
+      if(!server.get(scanner_frames[i], int_marker))
+      {
+        ROS_ERROR("Could not get interactive marker #%lu", i);
+        continue;
+      }
 
       tf::StampedTransform transform;
       const tf::Vector3 pos (int_marker.pose.position.x, int_marker.pose.position.y, int_marker.pose.position.z);

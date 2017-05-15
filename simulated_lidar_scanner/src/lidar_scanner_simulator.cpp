@@ -1,4 +1,4 @@
-#include <lidar_scanner_node/lidar_scanner_simulator.h>
+#include <simulated_lidar_scanner/lidar_scanner_simulator.h>
 #include <pcl_ros/point_cloud.h>
 #include <pcl_ros/transforms.h>
 #include <tf/transform_datatypes.h>
@@ -43,7 +43,6 @@ namespace
 
       cloud.push_back(pt);
     }
-
   }
 
 }

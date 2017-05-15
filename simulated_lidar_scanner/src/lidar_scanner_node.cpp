@@ -1,7 +1,7 @@
 #include <ros/ros.h>
 #include <ros/package.h>
-#include <lidar_scanner_node/lidar_scanner_simulator.h>
-#include <lidar_scanner_node/scene_builder.h>
+#include <simulated_lidar_scanner/lidar_scanner_simulator.h>
+#include <simulated_lidar_scanner/scene_builder.h>
 #include <pcl_ros/point_cloud.h>
 #include <sensor_msgs/PointCloud2.h>
 #include <tf/transform_listener.h>
@@ -14,13 +14,15 @@ const static double SCAN_FREQUENCY = 10.0; // Hz
 const static double TF_TIMEOUT = 10.0; // seconds
 const static double TF_FILTER_DIST = 0.025; // meters
 const static double TF_FILTER_DIST_SQR = TF_FILTER_DIST * TF_FILTER_DIST;
+const static double TF_FILTER_ANGLE = 1.0*(M_PI/180.0);
 
 static bool distanceComparator(const tf::StampedTransform& a,
                                const tf::StampedTransform& b)
 {
   const tf::Transform diff = a.inverseTimes(b);
   const double d2 = diff.getOrigin().length2();
-  return d2 > TF_FILTER_DIST_SQR;
+  const tfScalar q = diff.getRotation().getAngle();
+  return (d2 > TF_FILTER_DIST_SQR || q > TF_FILTER_ANGLE);
 }
 
 int main(int argc, char **argv)
@@ -42,11 +44,13 @@ int main(int argc, char **argv)
     ROS_FATAL("Theta span parameter must be set");
     return 1;
   }
+  sim.theta_span *= M_PI / 180.0;
   if(!pnh.getParam("scanner/phi_span", sim.phi_span))
   {
     ROS_FATAL("Phi span parameter must be set");
     return 1;
   }
+  sim.phi_span *= M_PI / 180.0;
   if(!pnh.getParam("scanner/theta_points", sim.theta_points))
   {
     ROS_FATAL("Theta points parameter must be set");
@@ -111,7 +115,7 @@ int main(int argc, char **argv)
     return 1;
   }
 
-  scanner.setScannerScene(builder.scene);
+  scanner.setScannerScene(builder.getVTKScene());
 
   ROS_INFO("Simulated LIDAR scanner initialized. Beginning data acquisition...");
 

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(lidar_scanner_node)
+project(simulated_lidar_scanner)
 
 add_compile_options(-std=c++11)
 find_package(catkin REQUIRED COMPONENTS
@@ -12,8 +12,8 @@ find_package(catkin REQUIRED COMPONENTS
   interactive_markers
   visualization_msgs
   )
-find_package(VTK 7.1 CONFIG)
-find_package(VTK 7.1 REQUIRED)
+
+find_package(VTK 7.1 REQUIRED NO_MODULE)
 include(${VTK_USE_FILE})
 
 find_package(cmake_modules REQUIRED)
@@ -41,13 +41,11 @@ target_link_libraries(synthetic_lidar_scanner
  ${VTK_LIBRARIES}
 )
 
-add_executable(lidar_scanner_node src/lidar_scanner_node.cpp
-                                  src/lidar_scanner_simulator.cpp
-                                  src/scene_builder.cpp)
+add_executable(simulated_lidar_scanner_node src/lidar_scanner_node.cpp
+                                            src/lidar_scanner_simulator.cpp
+                                            src/scene_builder.cpp)
 
-#add_dependencies(lidar_scanner_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-
-target_link_libraries(lidar_scanner_node
+target_link_libraries(simulated_lidar_scanner_node
   ${catkin_LIBRARIES}
   ${VTK_LIBRARIES}
   synthetic_lidar_scanner)

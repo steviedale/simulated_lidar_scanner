@@ -1,4 +1,4 @@
-#include <lidar_scanner_node/scene_builder.h>
+#include <simulated_lidar_scanner/scene_builder.h>
 #include <ros/ros.h>
 #include <ros/package.h>
 #include <vtkAppendPolyData.h>
@@ -6,6 +6,7 @@
 #include <vtkTransformPolyDataFilter.h>
 #include <vtkSTLReader.h>
 #include <urdf/model.h>
+#include <boost/filesystem.hpp>
 
 namespace
 {
@@ -39,9 +40,12 @@ namespace
     return transform;
   }
 
-  vtkSmartPointer<vtkPolyData> readSTLFile(std::string file)
+  vtkSmartPointer<vtkPolyData> readSTLFileCustom(std::string file)
   {
-    ROS_INFO("%s", file.c_str());
+    if(!boost::filesystem::exists(file.c_str()))
+    {
+      ROS_ERROR("File doesn't exist: %s", file.c_str());
+    }
 
     vtkSmartPointer<vtkSTLReader> reader = vtkSmartPointer<vtkSTLReader>::New();
     reader->SetFileName(file.c_str());
@@ -54,7 +58,7 @@ namespace
 
 SceneBuilder::SceneBuilder()
 {
-  scene = vtkSmartPointer<vtkPolyData>::New();
+  scene_ = vtkSmartPointer<vtkPolyData>::New();
   if(!urdf_model_.initParam("/robot_description"))
   {
     ROS_FATAL("'robot_description' parameter must be set");
@@ -209,43 +213,19 @@ void SceneBuilder::changeFilenames()
 
 bool SceneBuilder::vtkSceneFromMeshFiles()
 {
+  // Create a vtkAppendPolyData filter to combine multiple vtkPolyData objects
+  vtkSmartPointer<vtkAppendPolyData> append_filter = vtkSmartPointer<vtkAppendPolyData>::New();
 
-  if(scene_data_.size() > 1)
+  for(size_t i = 0; i < scene_data_.size(); ++i)
   {
-    // Create a vtkAppendPolyData filter to combine multiple vtkPolyData objects
-    vtkSmartPointer<vtkAppendPolyData> append_filter = vtkSmartPointer<vtkAppendPolyData>::New();
-
-    for(size_t i = 0; i < scene_data_.size(); ++i)
-    {
-      // Create the vtkPolyData object from the stl mesh filename
-      vtkSmartPointer<vtkTransformPolyDataFilter> transform_filter = vtkSmartPointer<vtkTransformPolyDataFilter>::New();
-      vtkSmartPointer<vtkPolyData> vtk_poly = readSTLFile(scene_data_[i].filename);
-      if(!vtk_poly) {return false;}
-
-      // Apply transform specified by URDF Pose
-      vtkSmartPointer<vtkTransform> link_transform = urdfPoseToVTKTransform(scene_data_[i].link_pose);
-      vtkSmartPointer<vtkTransform> joint_transform = urdfPoseToVTKTransform(scene_data_[i].joint_pose);
-      vtkSmartPointer<vtkTransform> transform = vtkSmartPointer<vtkTransform>::New();
-      transform->Concatenate(joint_transform->GetMatrix());
-      transform->Concatenate(link_transform->GetMatrix());
-
-      transform_filter->SetInputData(vtk_poly);
-      transform_filter->SetTransform(transform);
-      transform_filter->Update();
-
-      append_filter->AddInputData(transform_filter->GetOutput());
-    }
-    append_filter->Update();
-    scene = append_filter->GetOutput();
-  }
-  else
-  {
+    // Create the vtkPolyData object from the stl mesh filename
     vtkSmartPointer<vtkTransformPolyDataFilter> transform_filter = vtkSmartPointer<vtkTransformPolyDataFilter>::New();
-    vtkSmartPointer<vtkPolyData> vtk_poly = readSTLFile(scene_data_[0].filename);
+    vtkSmartPointer<vtkPolyData> vtk_poly = readSTLFileCustom(scene_data_[i].filename);
     if(!vtk_poly) {return false;}
-    vtkSmartPointer<vtkTransform> link_transform = urdfPoseToVTKTransform(scene_data_[0].link_pose);
-    vtkSmartPointer<vtkTransform> joint_transform = urdfPoseToVTKTransform(scene_data_[0].joint_pose);
 
+    // Apply transform specified by URDF Pose
+    vtkSmartPointer<vtkTransform> link_transform = urdfPoseToVTKTransform(scene_data_[i].link_pose);
+    vtkSmartPointer<vtkTransform> joint_transform = urdfPoseToVTKTransform(scene_data_[i].joint_pose);
     vtkSmartPointer<vtkTransform> transform = vtkSmartPointer<vtkTransform>::New();
     transform->Concatenate(joint_transform->GetMatrix());
     transform->Concatenate(link_transform->GetMatrix());
@@ -253,7 +233,11 @@ bool SceneBuilder::vtkSceneFromMeshFiles()
     transform_filter->SetInputData(vtk_poly);
     transform_filter->SetTransform(transform);
     transform_filter->Update();
-    scene = transform_filter->GetOutput();
+
+    append_filter->AddInputData(transform_filter->GetOutput());
   }
+  append_filter->Update();
+  scene_ = append_filter->GetOutput();
+
   return true;
 }

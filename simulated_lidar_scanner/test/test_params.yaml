@@ -1,9 +1,9 @@
 scanner:
-  # Horizontal Field of View (radians; 0 to 2*pi)
-  theta_span: 2.0
+  # Horizontal Field of View (degrees; 0 to 360)
+  theta_span: 90
 
-  # Vertical Field of View (radians; -pi to pi)
-  phi_span: 2.0
+  # Vertical Field of View (degrees; -180 to 180)
+  phi_span: 90
 
   # Number of Rays in Horizontal Plane
   theta_points: 50
@@ -11,10 +11,10 @@ scanner:
   # Number of Rays in Vertical Plane
   phi_points: 50
 
-  # Line of Sight Noise (optional, meters)
+  # Line of Sight Noise (meters)
   los_variance: 0.010
 
-  # Orthogonal Noise (optional, meters)
+  # Orthogonal Noise (meters)
   orthogonal_variance: 0.010
 
   # Maximum Angle of Incidence before loss of data (optional; degrees)

@@ -1,21 +1,21 @@
 <launch>
   <arg name="world_frame_name" default="odom"/>
   <arg name="scanner_parent_frame" default="odom"/>
-  <arg name="scanner_params_file" default="$(find lidar_scanner_node)/test/test_params.yaml"/>
+  <arg name="scanner_params_file" default="$(find simulated_lidar_scanner)/test/test_params.yaml"/>
 
-  <node name="scanner_relocator" pkg="lidar_scanner_node" type="scanner_relocator" output="screen" required="true">
+  <node name="scanner_relocator" pkg="simulated_lidar_scanner" type="scanner_relocator" output="screen">
     <param name="scanner_parent_frame" value="$(arg scanner_parent_frame)"/>
     <rosparam param="scanner_frames"> ["sensor_1", "sensor_2"] </rosparam>
   </node>
 
-  <include file="$(find lidar_scanner_node)/launch/start.launch">
+  <include file="$(find simulated_lidar_scanner)/launch/start.launch">
     <arg name="params_file" value="$(arg scanner_params_file)"/>
     <arg name="world_frame_name" value="$(arg world_frame_name)"/>
     <arg name="scanner_name" value="sensor_1"/>
     <arg name="scanner_frame_name" value="sensor_1"/>
   </include>
 
-  <include file="$(find lidar_scanner_node)/launch/start.launch">
+  <include file="$(find simulated_lidar_scanner)/launch/start.launch">
     <arg name="params_file" value="$(arg scanner_params_file)"/>
     <arg name="world_frame_name" value="$(arg world_frame_name)"/>
     <arg name="scanner_name" value="sensor_2"/>
