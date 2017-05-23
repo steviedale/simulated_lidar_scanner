@@ -30,9 +30,6 @@ int main(int argc, char **argv)
   // Set up ROS.
   ros::init(argc, argv, "lidar_sim_node");
 
-  // Set up ROS.
-  ros::init(argc, argv, "lidar_sim_node");
-
   // Set up ROS node handle
   ros::NodeHandle pnh("~");
 
