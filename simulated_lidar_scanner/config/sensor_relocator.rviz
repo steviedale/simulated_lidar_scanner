@@ -58,153 +58,19 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        airplane:
+        lidar_parent:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
-        floor:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        hangar:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        hangar_columns:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         odom:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        platform_base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        platform_link_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        platform_link_2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        platform_link_3:
+        view_object:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        platform_tool0:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        rail_base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        rail_link_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        rail_link_2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        rail_tool0:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        rail_touch_screen:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_balancer_piston:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_balancer_rod:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_base:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        robot_base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_link_b:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_link_l:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_link_r:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_link_s:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_link_t:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_link_u:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_tool0:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        sander_base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        sander_link_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        sander_tool0:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        scanner_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        scanner_2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        scanner_3:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
       Name: RobotModel
       Robot Description: robot_description
       TF Prefix: ""
@@ -216,75 +82,15 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        airplane:
-          Value: true
-        floor:
-          Value: true
-        hangar:
-          Value: true
-        hangar_columns:
+        lidar_parent:
           Value: true
         odom:
-          Value: true
-        platform_base_link:
-          Value: true
-        platform_link_1:
-          Value: true
-        platform_link_2:
-          Value: true
-        platform_link_3:
-          Value: true
-        platform_tool0:
-          Value: true
-        rail_base_link:
-          Value: true
-        rail_link_1:
-          Value: true
-        rail_link_2:
-          Value: true
-        rail_tool0:
-          Value: true
-        rail_touch_screen:
-          Value: true
-        robot_balancer_piston:
-          Value: true
-        robot_balancer_rod:
-          Value: true
-        robot_base:
-          Value: true
-        robot_base_link:
-          Value: true
-        robot_link_b:
-          Value: true
-        robot_link_l:
-          Value: true
-        robot_link_r:
-          Value: true
-        robot_link_s:
-          Value: true
-        robot_link_t:
-          Value: true
-        robot_link_u:
-          Value: true
-        robot_tool0:
-          Value: true
-        sander_base_link:
-          Value: true
-        sander_link_1:
-          Value: true
-        sander_tool0:
-          Value: true
-        scanner_1:
-          Value: true
-        scanner_2:
-          Value: true
-        scanner_3:
           Value: true
         sensor_1:
           Value: true
         sensor_2:
           Value: true
-        sensor_3:
+        view_object:
           Value: true
       Marker Scale: 1
       Name: TF
@@ -293,55 +99,13 @@ Visualization Manager:
       Show Names: true
       Tree:
         odom:
-          airplane:
+          lidar_parent:
+            sensor_1:
+              {}
+            sensor_2:
+              {}
+          view_object:
             {}
-          floor:
-            {}
-          hangar:
-            {}
-          hangar_columns:
-            {}
-          platform_base_link:
-            platform_link_1:
-              platform_link_2:
-                platform_link_3:
-                  platform_tool0:
-                    rail_base_link:
-                      rail_link_1:
-                        rail_link_2:
-                          rail_tool0:
-                            robot_base_link:
-                              robot_base:
-                                {}
-                              robot_link_s:
-                                robot_balancer_piston:
-                                  {}
-                                robot_balancer_rod:
-                                  {}
-                                robot_link_l:
-                                  robot_link_u:
-                                    robot_link_r:
-                                      robot_link_b:
-                                        robot_link_t:
-                                          robot_tool0:
-                                            sander_base_link:
-                                              sander_link_1:
-                                                sander_tool0:
-                                                  {}
-                      rail_touch_screen:
-                        {}
-                    scanner_1:
-                      {}
-                    scanner_2:
-                      {}
-                    scanner_3:
-                      {}
-                    sensor_1:
-                      {}
-                    sensor_2:
-                      {}
-                    sensor_3:
-                      {}
       Update Interval: 0
       Value: true
     - Class: rviz/InteractiveMarkers
@@ -378,7 +142,37 @@ Visualization Manager:
       Size (Pixels): 3
       Size (m): 0.00999999978
       Style: Points
-      Topic: /sensor_data
+      Topic: /sensor_data/sensor_1
+      Unreliable: false
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 1.43308508
+        Min Value: 0.252053261
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/PointCloud2
+      Color: 85; 170; 0
+      Color Transformer: FlatColor
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: PointCloud2
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.00999999978
+      Style: Points
+      Topic: /sensor_data/sensor_2
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
@@ -407,24 +201,24 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 30.1704369
+      Distance: 6.41038275
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -1.7552501
-        Y: 6.52755213
-        Z: 4.88143206
+        X: -0.931019902
+        Y: -0.394020945
+        Z: 1.12448955
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.255398154
+      Pitch: 0.272800863
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.9285779
+      Yaw: 5.42967987
     Saved: ~
 Window Geometry:
   Displays:

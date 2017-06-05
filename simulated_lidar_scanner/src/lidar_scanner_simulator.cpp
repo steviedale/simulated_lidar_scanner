@@ -53,6 +53,7 @@ LidarScannerSim::LidarScannerSim(const scanner_params& sim)
   scanner_ = vtkSmartPointer<vtkLidarScanner>::New();
   scan_data_vtk_ = vtkSmartPointer<vtkPolyData>::New();
   scan_data_cloud_.reset(new pcl::PointCloud<pcl::PointNormal> ());
+  noisy_scan_data_cloud_.reset(new pcl::PointCloud<pcl::PointNormal> ());
 
   // Set scanner parameters
   scanner_->SetPhiSpan(sim.phi_span);
@@ -66,13 +67,11 @@ LidarScannerSim::LidarScannerSim(const scanner_params& sim)
 
   if(sim.max_incidence_angle > 0.0)
   {
-    enable_incidence_filter_ = true;
     max_incidence_angle_ = -std::cos(sim.max_incidence_angle * M_PI / 180.0);
   }
 
   if(sim.max_distance > 0.0)
   {
-    enable_distance_filter_ = true;
     max_distance_ = sim.max_distance;
   }
 }
@@ -109,6 +108,50 @@ void LidarScannerSim::setScannerTransform(const tf::StampedTransform& frame)
   scanner_frame_ = frame;
 }
 
+void LidarScannerSim::addScannerNoise()
+{
+  double los_variance = scanner_->GetLOSVariance();
+  double orthogonal_variance = scanner_->GetOrthogonalVariance();
+
+  std::default_random_engine generator;
+  std::normal_distribution<double> los_dist (0.0, los_variance);
+  std::normal_distribution<double> orthogonal_dist(0.0, orthogonal_variance);
+
+  noisy_scan_data_cloud_->points.clear();
+
+  for(auto pt = scan_data_cloud_->points.begin(); pt != scan_data_cloud_->points.end(); ++pt)
+  {
+    pcl::PointNormal noisy_pt;
+    noisy_pt = *pt;
+
+    // Add Line-of-sight noise
+    if(los_variance > 0.0)
+    {
+      double los_noise = los_dist(generator);
+      noisy_pt.x += pt->normal_x * los_noise;
+      noisy_pt.y += pt->normal_y * los_noise;
+      noisy_pt.z += pt->normal_z * los_noise;
+    }
+
+    // Add orthogonal noise
+    if(orthogonal_variance > 0.0)
+    {
+      // Create a random normalized vector that is orthogonal to the point's current normal vector
+      Eigen::Vector3d norm (pt->normal_x, pt->normal_y, pt->normal_z);
+      Eigen::Vector3d rand_vec = Eigen::Vector3d::Random();
+      Eigen::Vector3d orthogonal_vec = norm.cross(rand_vec);
+      orthogonal_vec.normalize();
+
+      double orthogonal_noise = orthogonal_dist(generator);
+      noisy_pt.x += orthogonal_vec[0] * orthogonal_noise;
+      noisy_pt.y += orthogonal_vec[1] * orthogonal_noise;
+      noisy_pt.z += orthogonal_vec[2] * orthogonal_noise;
+    }
+
+    noisy_scan_data_cloud_->points.push_back(noisy_pt);
+  }
+}
+
 void LidarScannerSim::getNewScanData(const tf::StampedTransform& scanner_transform)
 {
   // Set the scanner transform
@@ -127,19 +170,19 @@ void LidarScannerSim::getNewScanData(const tf::StampedTransform& scanner_transfo
   pcl::transformPointCloudWithNormals(cloud, *scan_data_cloud_, transform);
 
   // Cull points whose angle of incidence is greater than the specified tolerance
-  if(enable_incidence_filter_)
+  if(max_incidence_angle_ > 0.0)
   {
     scan_data_cloud_->erase(std::remove_if(scan_data_cloud_->points.begin(),
                                           scan_data_cloud_->points.end(),
                                           boost::bind(incidenceFilter, _1, max_incidence_angle_)),
-                           scan_data_cloud_->end());
+                            scan_data_cloud_->end());
   }
 
-  if(enable_distance_filter_)
+  if(max_distance_ > 0.0)
   {
     scan_data_cloud_->erase(std::remove_if(scan_data_cloud_->points.begin(),
                                           scan_data_cloud_->points.end(),
                                           boost::bind(distanceFilter, _1, max_distance_)),
-                           scan_data_cloud_->end());
+                            scan_data_cloud_->end());
   }
 }

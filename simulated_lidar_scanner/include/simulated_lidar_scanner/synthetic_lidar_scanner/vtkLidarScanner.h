@@ -134,6 +134,8 @@ public:
 
   void WriteScanner(const std::string& filename) const; //write a vtp file of a coordinate system indicating the scanner's location and orientation
 
+  vtkSmartPointer<vtkDenseArray<vtkLidarPoint*>> GetScan() {return Scan;}
+
 protected:
 
   vtkLidarScanner();

@@ -5,6 +5,7 @@
 #include <tf/transform_broadcaster.h>
 
 const static double FREQUENCY = 10.0f;
+const static std::string SERVER_TOPIC = "scanner_relocator";
 
 visualization_msgs::Marker makeVisualMarker(std::string& scanner_frame)
 {
@@ -129,7 +130,8 @@ int main(int argc, char **argv)
   tf::TransformBroadcaster broadcaster;
 
   // Set up interactive marker server
-  interactive_markers::InteractiveMarkerServer server("scanner_relocator", "", true);
+  interactive_markers::InteractiveMarkerServer server(SERVER_TOPIC, "", false);
+  server.applyChanges();
 
   // Create an interactive marker for each of the remaining scanners
   for(size_t i = 0; i < scanner_frames.size(); ++i)
@@ -138,7 +140,6 @@ int main(int argc, char **argv)
     server.insert(int_marker);
     server.applyChanges();
   }
-  ros::spinOnce();
 
   // Loop
   ros::Rate loop(FREQUENCY);

@@ -399,9 +399,12 @@ void vtkLidarScanner::ConstructOutput()
         // Don't modify the default "empty" values set in these variable declarations above.
         }
 
-      coordinateArray->SetTupleValue(index, coordinate);
-      normalArray->SetTupleValue(index, n);
-      imageScalars->SetTupleValue(index, pixel);
+//      coordinateArray->SetTupleValue(index, coordinate);
+//      normalArray->SetTupleValue(index, n);
+//      imageScalars->SetTupleValue(index, pixel);
+        coordinateArray->SetTypedTuple(index, coordinate);
+        normalArray->SetTypedTuple(index, n);
+        imageScalars->SetTypedTuple(index, pixel);
       depthArray->SetValue(index, depth);
 
       }
@@ -536,7 +539,7 @@ void vtkLidarScanner::AcquirePoint(const unsigned int thetaIndex, const unsigned
   // Set the flag for this point indicating that there was a valid intersection
   this->Scan->GetValue(phiIndex, thetaIndex)->SetHit(true);
 
-  this->AddNoise(Scan->GetValue(phiIndex, thetaIndex));
+//  this->AddNoise(Scan->GetValue(phiIndex, thetaIndex));
 
 }
 

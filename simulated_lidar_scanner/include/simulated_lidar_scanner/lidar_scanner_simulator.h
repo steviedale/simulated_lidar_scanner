@@ -25,24 +25,24 @@ struct scanner_params
   double phi_span;
 
   /**
-   * @brief Scanner noise in the direction of the cast ray (line-of-sight) (meters)
+   * @brief Scanner noise in the direction of the cast ray (line-of-sight) (meters). Default is 0.0.
    */
-  double los_variance;
+  double los_variance = 0.0;
 
   /**
-   * @brief Scanner noise in the direction orthogonal to the cast ray (meters)
+   * @brief Scanner noise in the direction orthogonal to the cast ray (meters). Default is 0.0.
    */
-  double orthogonal_variance;
+  double orthogonal_variance = 0.0;
 
   /**
-   * @brief Maximum angle of incidence of the cast ray to the surface before loss of data (optional; radians)
+   * @brief Maximum angle of incidence of the cast ray to the surface before loss of data (radians). Default is 0.0.
    */
-  double max_incidence_angle;
+  double max_incidence_angle = 0.0;
 
   /**
-   * @brief Maximum scanner sensing distance (optional; meters)
+   * @brief Maximum scanner sensing distance (meters). Default is 0.0.
    */
-  double max_distance;
+  double max_distance = 0.0;
 
   /**
    * @brief Number of rays to be cast in the horizontal direction
@@ -82,6 +82,13 @@ public:
   void setScannerTransform(const tf::StampedTransform& frame);
 
   /**
+   * @brief Add line-of-sight and orthogonal noise based on a normal distribution to the sensor data.
+   * This function is a re-implementation of a similar function in vtkLidarScanner.cxx; however this function can be called outside the ray-casting
+   * operation and without the need of converting vtkPolyData or PCL point objects into vtkLidarPoint objects
+   */
+  void addScannerNoise();
+
+  /**
    * @brief Perform a new scan with the simulated scanner's position defined by the input transformation relative to the fixed world frame.
    * The acquired scan data is saved to an internal class variable which can be accessed by the getScanPolyData() or getScanDataPointCloud() members.
    * @param scanner_transform
@@ -98,17 +105,16 @@ public:
    * @brief Returns the last acquired scan data from an internal class variable to a PCL Point Cloud
    * @return A pointer to a PCL point cloud of the scanner return points
    */
-  pcl::PointCloud<pcl::PointNormal>::Ptr getScanDataPointCloud() const {return scan_data_cloud_;}
+  pcl::PointCloud<pcl::PointNormal>::Ptr getScanDataPointCloud() const {return noisy_scan_data_cloud_;}
 
 private:
   vtkSmartPointer<vtkLidarScanner> scanner_;
   vtkSmartPointer<vtkPolyData> scan_data_vtk_;
   pcl::PointCloud<pcl::PointNormal>::Ptr scan_data_cloud_;
+  pcl::PointCloud<pcl::PointNormal>::Ptr noisy_scan_data_cloud_;
   tf::StampedTransform scanner_frame_;
-  bool enable_incidence_filter_ = false;
-  double max_incidence_angle_;
-  bool enable_distance_filter_ = false;
-  double max_distance_;
+  double max_incidence_angle_ = 0.0;
+  double max_distance_ = 0.0;
 };
 
 #endif // LIDAR_SCANNER_SIMULATOR_H
