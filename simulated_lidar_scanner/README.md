@@ -1,6 +1,6 @@
 # Simulated Lidar Scanner
 
-![1]
+![Simulated Lidar Scanner][1]
 
 ## Description
 
@@ -17,6 +17,7 @@ This package depends on VTK 6.2.
 ### Simulated Lidar Scanner Node
 
 **Parameters**
+
 *Scanner-specific parameters* (to be saved in a .yaml file)
 + `scanner/scan_frequency` (double; hz)
   - **Required:** update frequency of the scanner
@@ -79,6 +80,6 @@ Currently the interactive markers do not appear when the demo is initiallly laun
 `rosrun simulated_lidar_scanner scanner_relocator`
 
 
-[1]: simulated_lidar_scanner.png, "Simulated Lidar Scanner"
+[1]: simulated_lidar_scanner.png
 [2]: https://github.com/daviddoria/SyntheticLidarScanner
 [3]: https://github.com/daviddoria
