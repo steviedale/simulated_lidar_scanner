@@ -80,6 +80,6 @@ Currently the interactive markers do not appear when the demo is initiallly laun
 `rosrun simulated_lidar_scanner scanner_relocator`
 
 
-[1]: simulated_lidar_scanner.png
+[1]: simulated_lidar_scanner.gif
 [2]: https://github.com/daviddoria/SyntheticLidarScanner
 [3]: https://github.com/daviddoria
