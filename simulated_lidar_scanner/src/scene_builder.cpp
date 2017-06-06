@@ -22,9 +22,9 @@ namespace
     if(denom < 0.001)
     {
       // Choose an arbitrary axis since the rotation angle ~= 0
-      x = 0.0; //q.x;
-      y = 0.0; //q.y;
-      z = 1.0; //q.z;
+      x = 0.0;
+      y = 0.0;
+      z = 1.0;
     }
     else
     {
@@ -40,7 +40,7 @@ namespace
     return transform;
   }
 
-  vtkSmartPointer<vtkPolyData> readSTLFileCustom(std::string file)
+  vtkSmartPointer<vtkPolyData> readSTLFile(std::string file)
   {
     if(!boost::filesystem::exists(file.c_str()))
     {
@@ -220,7 +220,7 @@ bool SceneBuilder::vtkSceneFromMeshFiles()
   {
     // Create the vtkPolyData object from the stl mesh filename
     vtkSmartPointer<vtkTransformPolyDataFilter> transform_filter = vtkSmartPointer<vtkTransformPolyDataFilter>::New();
-    vtkSmartPointer<vtkPolyData> vtk_poly = readSTLFileCustom(scene_data_[i].filename);
+    vtkSmartPointer<vtkPolyData> vtk_poly = readSTLFile(scene_data_[i].filename);
     if(!vtk_poly) {return false;}
 
     // Apply transform specified by URDF Pose

@@ -22,9 +22,9 @@ This package depends on VTK 6.2.
 + `scanner/scan_frequency` (double; hz)
   - **Required:** update frequency of the scanner
 + `scanner/theta_span` (double; degrees)
-  - **Required:** horizontal field of view of the scanner, from -180 to +180
+  - **Required:** horizontal field of view of the scanner, from -360 to +360
 + `scanner/phi_span` (double; degrees)
-  - **Required:** vertical field of view of the scanner, from -90 to +90
+  - **Required:** vertical field of view of the scanner, from -180 to +180
 + `scanner/theta_points` (int)
   - **Required:** number of rays to be cast in the horizontal direction
 + `scanner/phi_points` (int)

@@ -2,7 +2,7 @@ scanner:
   # Scan Update Frequency (Hz)
   scan_frequency: 10.0
 
-  # Horizontal Field of View (degrees; 0 to 360)
+  # Horizontal Field of View (degrees; -360 to 360)
   theta_span: 90.0
 
   # Vertical Field of View (degrees; -180 to 180)

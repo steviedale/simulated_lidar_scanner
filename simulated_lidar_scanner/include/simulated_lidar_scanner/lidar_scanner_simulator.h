@@ -15,7 +15,7 @@
 struct scanner_params
 {
   /**
-   * @brief Horizontal scanner field of view angle (radians; 0 to 2*pi)
+   * @brief Horizontal scanner field of view angle (radians; -2*pi to 2*pi)
    */
   double theta_span;
 
