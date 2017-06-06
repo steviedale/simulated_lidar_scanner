@@ -28,43 +28,43 @@ bool getScannerParameters(ros::NodeHandle& nh,
 {
   if(!nh.getParam("scanner/theta_span", sim.theta_span))
   {
-    ROS_ERROR("Theta span parameter must be set");
+    ROS_ERROR("scanner/theta_span' parameter must be set");
     return false;
   }
   sim.theta_span *= M_PI / 180.0;
   if(!nh.getParam("scanner/phi_span", sim.phi_span))
   {
-    ROS_ERROR("Phi span parameter must be set");
+    ROS_ERROR("'scanner/phi_span' parameter must be set");
     return false;
   }
   sim.phi_span *= M_PI / 180.0;
   if(!nh.getParam("scanner/theta_points", sim.theta_points))
   {
-    ROS_ERROR("Theta points parameter must be set");
+    ROS_ERROR("'scanner/theta_points' parameter must be set");
     return false;
   }
   if(!nh.getParam("scanner/phi_points", sim.phi_points))
   {
-    ROS_ERROR("Phi points parameter must be set");
+    ROS_ERROR("'scanner/phi_points' parameter must be set");
     return false;
   }
 
   // Get the optional parameters
   if(!nh.getParam("scanner/los_variance", sim.los_variance))
   {
-    ROS_INFO("LOS variance parameter defaulting to 0.0");
+    ROS_INFO("'scanner/los_variance' parameter defaulting to 0.0");
   }
   if(!nh.getParam("scanner/orthogonal_variance", sim.orthogonal_variance))
   {
-    ROS_INFO("Orthogonal variance parameter defaulting to 0.0");
+    ROS_INFO("'scanner/orthogonal_variance' parameter defaulting to 0.0");
   }
   if(!nh.getParam("scanner/max_incidence_angle", sim.max_incidence_angle))
   {
-    ROS_INFO("max_incidence_angle parameter not set; disabling incidence check");
+    ROS_INFO("'scanner/max_incidence_angle' parameter not set; disabling incidence check");
   }
   if(!nh.getParam("scanner/max_distance", sim.max_distance))
   {
-    ROS_INFO("max_distance parameter not set; disabling distance filter");
+    ROS_INFO("'scanner/max_distance' parameter not set; disabling distance filter");
   }
 
   return true;
@@ -85,47 +85,48 @@ int main(int argc, char **argv)
     return -1;
   }
 
-  std::string world_frame;
-  if(!pnh.getParam("world_frame", world_frame))
+  std::string fixed_frame;
+  if(!pnh.getParam("fixed_frame", fixed_frame))
   {
-    ROS_ERROR("World frame name parameter must be set");
+    ROS_ERROR("'fixed_frame' parameter must be set");
     return -1;
   }
 
   std::string scanner_frame;
   if(!pnh.getParam("scanner_frame", scanner_frame))
   {
-    ROS_ERROR("Scanner frame name parameter must be set");
+    ROS_ERROR("'scanner_frame' parameter must be set");
     return -1;
   }
 
   double tf_filter_angle;
   if(!pnh.getParam("tf_filter_angle", tf_filter_angle))
   {
-    ROS_ERROR("TF filter angle parameter must be set");
-    return -1;
+    ROS_ERROR("'tf_filter_angle' parameter not set; defaulting to 0.0");
+    tf_filter_angle = 0.0;
   }
+  tf_filter_angle *= M_PI / 180.0;
 
   double tf_filter_distance;
   if(!pnh.getParam("tf_filter_distance", tf_filter_distance))
   {
-    ROS_ERROR("TF filter distance parameter must be set");
-    return -1;
+    ROS_ERROR("'tf_filter_distance' parameter not set; defaulting to 0.0");
+    tf_filter_distance = 0.0;
   }
   double tf_filter_distance_sqr = tf_filter_distance * tf_filter_distance;
 
   double scan_frequency;
   if(!pnh.getParam("scanner/scan_frequency", scan_frequency))
   {
-    ROS_ERROR("Scan frequency parameter must be set");
+    ROS_ERROR("'scanner/scan_frequency' parameter must be set");
     return -1;
   }
 
   // Create a ROS tf listener to get the scanner frame
   tf::TransformListener listener;
-  if(!listener.waitForTransform(world_frame, scanner_frame, ros::Time(0), ros::Duration(TF_TIMEOUT)))
+  if(!listener.waitForTransform(fixed_frame, scanner_frame, ros::Time(0), ros::Duration(TF_TIMEOUT)))
   {
-    ROS_ERROR("TF listener timeout for '%s' to '%s' transform", world_frame.c_str(), scanner_frame.c_str());
+    ROS_ERROR("TF listener timeout for '%s' to '%s' transform", fixed_frame.c_str(), scanner_frame.c_str());
     return -1;
   }
 
@@ -160,7 +161,7 @@ int main(int argc, char **argv)
     tf::StampedTransform transform;
     try
     {
-      listener.lookupTransform(world_frame, scanner_frame, ros::Time(0), transform);
+      listener.lookupTransform(fixed_frame, scanner_frame, ros::Time(0), transform);
     }
     catch(tf::TransformException ex)
     {

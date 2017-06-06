@@ -17,8 +17,8 @@ scanner:
   # Line of Sight Noise (optional; meters)
   los_variance: 0.010
 
-  # Orthogonal Noise (optional; radians)
-  orthogonal_variance: 0.005
+  # Orthogonal Noise (optional; meters)
+  orthogonal_variance: 0.010
 
   # Maximum Angle of Incidence before loss of data (optional; degrees)
   max_incidence_angle: 60.0

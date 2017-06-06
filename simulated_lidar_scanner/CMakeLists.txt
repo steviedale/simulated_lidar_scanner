@@ -13,7 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
   visualization_msgs
   )
 
-find_package(VTK 7.1 REQUIRED NO_MODULE)
+find_package(VTK 6.2 REQUIRED)
 include(${VTK_USE_FILE})
 
 find_package(cmake_modules REQUIRED)
@@ -23,7 +23,6 @@ catkin_package(
   LIBRARIES simulated_lidar_scanner
   CATKIN_DEPENDS
     roscpp
-    tf
   DEPENDS
     VTK
 )

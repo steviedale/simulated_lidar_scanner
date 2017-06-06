@@ -1,5 +1,4 @@
 <?xml version="1.0" ?>
-
 <robot name="lidar_test" xmlns:xacro="http://ros.org/wiki/xacro">
   <link name="odom"/>
   <link name="lidar_parent"/>
