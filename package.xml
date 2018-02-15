@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package>
-  <name>simulated_lidar_scanner</name>
+  <name>simulated_depth_sensor</name>
   <version>0.1.0</version>
   <description>The simulated_lidar_scanner package</description>
 
